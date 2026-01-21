@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+    <div id="background">
+        <div id="main_text">
+            <div id="title">파자마 파티 초대장
+            </div>
+            <div id="des">오늘밤, 어떤 파티를 즐길까요?</div>
+        </div>
+        <div id="theme_con">
+            <a href="/result?theme=밤샘 파티" class="theme">
+                <img src="https://i.pinimg.com/736x/d5/5b/ca/d55bca0c2c64dc53583e488b4b1838a1.jpg" alt="테마 이미지" />
+                <div class="theme_text">
+                    <div class="theme_title">밤샘 파티</div>
+                    <div class="theme_des">잠은 포기, 재미는 두 배</div>
+                </div>
+            </a>
+            <a href="/result?theme=이불 덮고 보는 공포" class="theme">
+                <img src="https://i.pinimg.com/736x/64/bc/d6/64bcd691c5f6f0fa8a8e342bfeea87fd.jpg" alt="테마 이미지" />
+                <div class="theme_text">
+                    <div class="theme_title">이불 덮고 보는 공포</div>
+                    <div class="theme_des">무서워도 눈은 못 감아</div>
+                </div>
+            </a>
+            <a href="/result?theme=이불 위 영화 극장" class="theme">
+                <img src="https://i.pinimg.com/736x/60/68/96/6068961d5bf920f0077856b0f3932a43.jpg" alt="테마 이미지" />
+                <div class="theme_text">
+                    <div class="theme_title">이불 위 영화 극장</div>
+                    <div class="theme_des">이불이 곧 영화관</div>
+                </div>
+            </a>
+            <a href="/result?theme=설렘 가득 파자마" class="theme">
+                <img src="https://i.pinimg.com/1200x/32/cd/96/32cd96ad6eb4040ea679ade16d1e9174.jpg" alt="테마 이미지" />
+                <div class="theme_text">
+                    <div class="theme_title">설렘 가득 파자마</div>
+                    <div class="theme_des">잔잔하게 보기 좋은 영화</div>
+                </div>
+            </a>
+        </div>
+    </div>
+</body>
+
+</html>

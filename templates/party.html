@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+    <div id="background">
+        <div id="title">🎉파자마 파티 초대장🎉</div>
+        <div id="content">
+            <div id="movie_container">
+                <div id="movie_title">{{movie['title']}}</div>
+                <div id="little_con">
+                    <img src="https://image.tmdb.org/t/p/w500{{ movie['poster_path'] }}" alt="영화 이미지" id="movie_poster" />
+                    <div id="movie_overview">{{movie['overview']}}</div>
+                </div>
+            </div>
+            <div id="snack_container">
+                <div id="snack_name">{{snack['s_name']}}</div>
+                <img src="{{snack['s_img']}}" alt="과자 이미지" id="snack_img" />
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

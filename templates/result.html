@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+    <div id="background">
+        <div id="main_text">
+            <div id="title">
+                <div>{{theme}}</div>엔 이 영화 & 간식!
+            </div>
+            <div id="des">가장 끌리는 영화와 간식을 골라보세요</div>
+        </div>
+        <div id="pick_con">
+            <div class="pick">
+                <div class="pick_title">1.영화 고르기</div>
+
+                <div id="movie_con">
+                    {% for movie in movies %}
+                    <div class="movie_box">
+                        <div class="movie_title">{{movie['title']}}</div>
+                        <hr />
+                        <div class="movie_des_con">
+                            <img src="https://image.tmdb.org/t/p/w500{{ movie['poster_path'] }}" alt="영화 포스터" />
+                            <div>
+                                {% if movie['overview'] =='' %}
+                                내용이 없습니다.
+                                {% else %}
+                                {{movie['overview']}}
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+
+                </div>
+            </div>
+
+            <div class="pick">
+                <div class="pick_title">2.간식 고르기</div>
+                <div id="snacks_">
+                    {% for snack in snacks %}
+                    <div class="snack_option">
+                        <img src='{{snack[' s_img']}}' alt="간식 사진" />
+                        <div class="snack">{{snack['s_name']}}</div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+        <button id="party" disabled>파티 초대장 만들기</button>
+
+    </div>
+    <script>
+        const movies = {{ movies | tojson }};
+        const snacks = {{ snacks | tojson }};
+
+        console.log(movies, snacks)
+
+        const movie_boxes = document.querySelectorAll('.movie_box')
+        const snack_opitions = document.querySelectorAll('.snack_option')
+        const last_page = document.querySelector('#party')
+
+        // 선택된 영화의 인덱스(0부터 시작하는 순서)를 저장
+        let selected_movie_idx
+        let selected_snack_idx
+
+
+        for (let i = 0; i < movie_boxes.length; i++) {
+            movie_boxes[i].addEventListener('click', () => {
+
+                // 기존에 selected_movie_idx번째 요소에 selected 클래스를 지움
+                if (typeof selected_movie_idx === 'number') {
+                    movie_boxes[selected_movie_idx].classList.remove('selected')
+                }
+
+                // 누른 요소에 selected 클래스 추가
+                movie_boxes[i].classList.add('selected')
+
+                // selected_movie_idx 정보 업데이트
+                selected_movie_idx = i
+
+
+                if (checkIsButtonAbled()) {
+                    last_page.disabled = false
+                } else {
+                    last_page.disabled = true
+                }
+            })
+        }
+
+
+        for (let i = 0; i < snack_opitions.length; i++) {
+            snack_opitions[i].addEventListener('click', () => {
+                if (typeof selected_snack_idx === 'number') {
+                    snack_opitions[selected_snack_idx].classList.remove('selected')
+                }
+
+                selected_snack_idx = i
+
+                snack_opitions[selected_snack_idx].classList.add('selected')
+
+                if (checkIsButtonAbled()) {
+                    last_page.disabled = false
+                } else {
+                    last_page.disabled = true
+                }
+            })
+        }
+
+        last_page.addEventListener('click', () => {
+            window.location.href = `/party?movie=${encodeURIComponent(JSON.stringify(movies[selected_movie_idx]))}&snack=${encodeURIComponent(JSON.stringify(snacks[selected_snack_idx]))}`
+        })
+
+
+        function checkIsButtonAbled() {
+            if (typeof selected_movie_idx == 'number' && typeof selected_snack_idx == 'number') {
+                return true
+            }
+        }
+    </script>
+</body>
+
+</html>
